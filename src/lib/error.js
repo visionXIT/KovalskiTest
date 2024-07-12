@@ -1,18 +1,19 @@
 const { logger } = require("./logger");
 
 class ApiError {
-  constructor(code, msg) {
+  constructor(code, msg, type = null) {
     this.code = code;
     this.msg = msg;
+    this.type = type;
   }
 
   toString() {
-    return this.code + " :: " + this.msg
+    return this.code + " :: " + this.msg;
   }
 }
 
 const apiErrorHandler = async (err, req, res, next) => {
-  logger.error(err)
+  logger.error(err);
 
   if (err instanceof ApiError) {
     res.status(err.code).json({ msg: err.msg });
