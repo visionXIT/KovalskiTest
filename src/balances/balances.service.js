@@ -4,7 +4,7 @@ const { getUserBalance, setUserBalance } = require("./balances.repo")
 const updateUserBalance = async (userId, amount) => {
   const currentBalance = await getUserBalance(userId)
 
-  if (currentBalance === null) {
+  if (!currentBalance) {
     throw new ApiError(404, "User is not found")
   }
 

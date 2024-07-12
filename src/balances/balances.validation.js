@@ -6,7 +6,7 @@ const validateUpdateBalanceHandler = (body) => {
   }
 
   if (isNaN(Number(body.userId)) || isNaN(Number(body.amount))) {
-    throw new ApiError(400, "userId should be a number")
+    throw new ApiError(400, "userId and amount should be numbers")
   }
 
   if (body.amount === 0) {

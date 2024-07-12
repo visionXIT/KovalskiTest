@@ -14,7 +14,10 @@ const logger = {
 }
 
 const logRequest = (req, res, next) => {
-  logger.info(req.url + " :: (req.body)" + JSON.stringify(req.body) + " ;; (req.params)" + JSON.stringify(req.params))
+  logger.info(req.url + 
+      (Object.keys(req?.body).length ? " :: (req.body)" + JSON.stringify(req.body) : "") + 
+      (Object.keys(req?.params).length ? " :: (req.params)" + JSON.stringify(req.params) : "")
+  )
   next()
 }
 
