@@ -1,7 +1,4 @@
 const { db } = require("../../models/index");
-const { Transaction } = require("sequelize");
-const { logger } = require("../lib/logger");
-const { ApiError } = require("../lib/error");
 
 const getWaitingTaskAndSelect = async () => {
   let task;
