@@ -1,21 +1,21 @@
-const { ApiError } = require("../lib/error")
-const { getUserBalance, setUserBalance } = require("./balances.repo")
+const { ApiError } = require("../lib/error");
+
+const { getUserBalance, changeUserBalance } = require("./balances.repo");
 
 const updateUserBalance = async (userId, amount) => {
-  const currentBalance = await getUserBalance(userId)
+  const currentBalance = await getUserBalance(userId);
 
-  if (!currentBalance) {
-    throw new ApiError(404, "User is not found")
+  if (currentBalance == null || currentBalance == undefined) {
+    throw new ApiError(404, "User is not found");
   }
 
-  const newBalance = currentBalance + amount
+  const updatedInfo = await changeUserBalance(userId, amount);
 
-  if (newBalance < 0) {
-    throw new ApiError(400, "User balance cannot be lower than 0")
+  if (updatedInfo[0] === 0) {
+    throw new ApiError(400, "User cannot have a negative balance");
   }
 
-  await setUserBalance(userId, newBalance)
-  return newBalance
-}
+  return updatedInfo[1][0].dataValues.balance;
+};
 
-module.exports = {updateUserBalance}
+module.exports = { updateUserBalance };
