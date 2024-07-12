@@ -5,7 +5,6 @@ const { balanceRouter } = require("./balances/balances.controller");
 const { apiErrorHandler } = require("./lib/error");
 const { init } = require("../models/index");
 const { logRequest } = require("./lib/logger");
-const { tasksRouter } = require('./cron-tasks/tasks.controller');
 
 require('dotenv').config()
 
@@ -26,7 +25,6 @@ async function main() {
   app.use(logRequest)
 
   app.use("/balance", balanceRouter);
-  app.use("/tasks", tasksRouter)
 
   app.use(apiErrorHandler)
 
