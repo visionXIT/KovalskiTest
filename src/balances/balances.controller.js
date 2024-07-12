@@ -15,7 +15,7 @@ balanceRouter.post("/update", asyncHandler(async (req, res) => {
 }));
 
 balanceRouter.get("/get/:userId", asyncHandler(async (req, res) => {
-  const userId = req.params.userId
+  const userId = +req.params.userId
 
   const balance = await getUserBalance(userId)
 
