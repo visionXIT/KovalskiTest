@@ -7,9 +7,8 @@ const {
   getTasksStatus,
   prepareTasks,
 } = require("./tasks.service");
-const { setAllTasksToWaiting } = require("./tasks.repo");
 
-cron.schedule("30 * * * * *", async () => {
+cron.schedule("* */5 * * * *", async () => {
   logger.info("Starting preparing tasks");
   await prepareTasks();
   logger.info("All tasks statuses set to waiting");
